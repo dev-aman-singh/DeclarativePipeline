@@ -1,19 +1,19 @@
 pipeline {
 	agent any
 	stages {
-		stage('cleaning stage'){
+		stage("Parallel Execution") {
 			steps {
-			   bat "mvn clean"
-			}
-		}
-		stage('Testing stage'){
-			steps {
-			   bat "mvn test"
-			}
-		}	
-	       stage('Packaging stage'){
-			steps {
-			   bat "mvn package"
+				parallel(
+				      a: {
+					bat "mvn clean"
+				      },
+				      b: {
+					bat "mvn test"
+				      },
+				      c: {
+					bat "mvn package"
+				      }
+				)
 			}
 		}
 		
@@ -27,7 +27,7 @@ pipeline {
 		
 		stage("Email Build Status"){
 			steps {
-				mail bcc: '', body: 'please check email carefully', cc: 'amansingh1031997@gmail.com', from: '', replyTo: '', subject: 'Testing of mail in declarative pipeline', to: 'amansingh1031997@gmail.com'
+				mail body: "${env.JOB_NAME}  - Build # ${env.BUILD_NUMBER}  - ${currentBuild.currentResult} \n\nCheck console output at ${env.BUILD_URL} to view the results.", subject: "${env.JOB_NAME}  - Build # ${env.BUILD_NUMBER}  - ${currentBuild.currentResult}!!", to: 'amansingh1031997@gmail.com'
 			}
 		}
 		

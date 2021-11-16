@@ -27,7 +27,7 @@ pipeline {
 		
 		stage("Email Build Status"){
 			steps {
-				mail bcc: '', body: '', cc: 'amansingh1031997@gmail.com', from: '', replyTo: '', subject: 'Testing of mail in declarative pipeline', to: 'amansingh1031997@gmail.com'
+				mail bcc: '', body: 'please check email carefully', cc: 'amansingh1031997@gmail.com', from: '', replyTo: '', subject: 'Testing of mail in declarative pipeline', to: 'amansingh1031997@gmail.com'
 			}
 		}
 		

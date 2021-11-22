@@ -25,13 +25,7 @@ pipeline {
 			}
 		}
 		
-		stage("Deploy on Production")
-		{
-		  steps{
-		    echo "deploying on Production or Container"
-			deploy adapters: [tomcat9(credentialsId: 'c635b8c3-0a1e-4828-bde6-9f26edb38949', path: '', url: 'http://localhost:9090')], contextPath: '/deployment', war: '**/*.war'
-		  }
-		}
+		
 		
 		
 		
